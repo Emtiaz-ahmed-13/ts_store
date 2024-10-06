@@ -7,10 +7,11 @@ const App = () => {
     <Router>
       <div className="flex h-screen">
         {/* Sidebar */}
-        <SideBar />
-
+        <SideBar /> {/* Sidebar takes up defined width */}
         {/* Main Content */}
-        <div className="w-full flex flex-col">
+        <div className="flex-1">
+          {" "}
+          {/* Main content takes the remaining space */}
           <Routes>
             <Route path="/" element={<MainContent />} />
           </Routes>
