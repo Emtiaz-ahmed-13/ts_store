@@ -1,24 +1,23 @@
-import axios from "axios"; // Don't forget to import axios!
+import axios from "axios";
 import { Tally1 } from "lucide-react";
 import { useEffect, useState } from "react";
 import BookCard from "./BookCard";
 import { useFilter } from "./FilterContext";
 
-// Define the interface for a product
 interface Product {
   id: string;
   title: string;
   category: string;
   price: number;
   thumbnail: string;
-  rating: number; // Assuming rating is also part of the product
+  rating: number;
 }
 
 const MainContent = () => {
   const { searchQuery, selectedCategory, minPrice, maxPrice, keywords } =
     useFilter();
 
-  const [products, setProducts] = useState<Product[]>([]); // Use Product type for products
+  const [products, setProducts] = useState<Product[]>([]);
   const [filter, setFilter] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -36,10 +35,10 @@ const MainContent = () => {
 
       try {
         const response = await axios.get(url);
-        setProducts(response.data.products); // Updated to access the correct path
+        setProducts(response.data.products);
         console.log(response.data.products);
       } catch (error) {
-        console.error("Error fetching products:", error); // Proper error handling
+        console.error("Error fetching products:", error);
       }
     };
 
@@ -90,8 +89,8 @@ const MainContent = () => {
     }
   };
 
-  const filteredProducts = getFilteredProducts(); // Get the filtered products
-  const totalProducts = 100; // Set this to the correct number from your API if available
+  const filteredProducts = getFilteredProducts();
+  const totalProducts = 100;
   const totalPages = Math.ceil(totalProducts / itemsPerPage);
 
   const handlePageChange = (page: number) => {
@@ -102,10 +101,10 @@ const MainContent = () => {
 
   return (
     <section className="xl-w-[55rem] lg:w-[48rem] xs:w-[28rem] p-5">
-      <div className="flex flex-col sm:flex-row justify-between items-center">
+      <div className=" sm:flex-row justify-between items-center">
         <div className="relative mb-5 mt-5">
           <button
-            className="border px-4 py-2 rounded-full flex items-center"
+            className="border px-4 py-2 rounded-full flex items"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
             <Tally1 className="mr-2" />
@@ -160,7 +159,7 @@ const MainContent = () => {
         </div>
 
         {/* Pagination */}
-        <div className="flex flex-col sm:flex-row justify-between items-center mt-5">
+        <div className="flex flex-col sm:flex-row justify-between  mt-5">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
@@ -170,7 +169,7 @@ const MainContent = () => {
           </button>
           <button
             onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages} // Corrected here
+            disabled={currentPage === totalPages}
             className="border px-4 py-2 mx-2 rounded-full"
           >
             Next

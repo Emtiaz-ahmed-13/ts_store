@@ -1,17 +1,13 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import MainContent from "./components/MainContent";
-import SideBar from "./components/SideBar";
+import Sidebar from "./components/SideBar";
 
-const App = () => {
+function App() {
   return (
     <Router>
       <div className="flex h-screen">
-        {/* Sidebar */}
-        <SideBar /> {/* Sidebar takes up defined width */}
-        {/* Main Content */}
-        <div className="flex-1">
-          {" "}
-          {/* Main content takes the remaining space */}
+        <Sidebar />
+        <div className="rounded w-full  flex justify-between flex-wrap">
           <Routes>
             <Route path="/" element={<MainContent />} />
           </Routes>
@@ -19,6 +15,6 @@ const App = () => {
       </div>
     </Router>
   );
-};
+}
 
 export default App;
