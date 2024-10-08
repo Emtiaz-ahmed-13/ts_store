@@ -1,8 +1,8 @@
 import axios from "axios";
-import { Tally1 } from "lucide-react";
 import { useEffect, useState } from "react";
 import BookCard from "./BookCard";
 import { useFilter } from "./FilterContext";
+import { MdOutlineFilterList } from "react-icons/md";
 
 interface Product {
   id: string;
@@ -14,7 +14,7 @@ interface Product {
 }
 
 const MainContent = () => {
-  const { searchQuery, selectedCategory, minPrice, maxPrice, keywords } =
+  const { searchQuery, selectedCategory, minPrice, maxPrice, keyword } =
     useFilter();
 
   const [products, setProducts] = useState<Product[]>([]);
@@ -29,8 +29,8 @@ const MainContent = () => {
         (currentPage - 1) * itemsPerPage
       }`;
 
-      if (keywords) {
-        url = `https://dummyjson.com/products/search?q=${keywords}`;
+      if (keyword) {
+        url = `https://dummyjson.com/products/search?q=${keyword}`;
       }
 
       try {
@@ -43,7 +43,7 @@ const MainContent = () => {
     };
 
     fetchProducts();
-  }, [currentPage, keywords]);
+  }, [currentPage, keyword]);
 
   // Filter products based on category, price, and search query
   const getFilteredProducts = () => {
@@ -107,7 +107,7 @@ const MainContent = () => {
             className="border px-4 py-2 rounded-full flex items"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
-            <Tally1 className="mr-2" />
+            <MdOutlineFilterList className="mr-2" />
             {filter === "all"
               ? "Filter"
               : filter.charAt(0).toLowerCase() + filter.slice(1)}
